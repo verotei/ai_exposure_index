@@ -138,12 +138,13 @@
   ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
   @media(max-width:900px){
     header{padding:1.5rem;flex-direction:column;align-items:flex-start}
-    .layout{grid-template-columns:1fr}
-    aside{border-right:none;border-bottom:1px solid var(--border)}
-    .source-bar{padding:.6rem 1.5rem}
-    #chart-view,#sector-view,#radar-view{padding:1rem}
+    .layout{grid-template-columns:1fr;height:auto;min-height:calc(100vh - 200px)}
+    aside{border-right:none;border-bottom:1px solid var(--border);max-height:280px;overflow-y:auto;padding:1.2rem 1.2rem}
+    #chart-view,#sector-view,#radar-view{padding:1rem;height:auto;min-height:400px;overflow-y:auto;flex:none}
     .crow{grid-template-columns:160px 1fr 52px}
-      .rc{grid-template-columns:1fr}
+    .rc{grid-template-columns:1fr}
+    .tabs{padding:0 1rem}
+    .tab{padding:.55rem .8rem;font-size:.62rem}
   }
 
   #radar-wrap{width:100%;margin:.5rem 0 0}
