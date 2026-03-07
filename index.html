@@ -85,8 +85,10 @@
   #sector-view{padding:1.5rem 2rem;overflow-y:auto;flex:1}
   .sc{border:1px solid var(--border);border-radius:2px;margin-bottom:.8rem;overflow:hidden;transition:border-color .15s}
   .sc:hover{border-color:#3a3835}
-  .sch{display:grid;grid-template-columns:1fr 70px;align-items:center;gap:1.5rem;padding:1rem 1.2rem;cursor:pointer;background:var(--surface)}
-  .sn{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--text)}
+  .sch{display:grid;grid-template-columns:1fr 70px;align-items:center;gap:1.5rem;padding:1rem 1.2rem;cursor:pointer;background:var(--surface);transition:background .1s}
+  .sch:hover{background:var(--surface2)}
+  .sch:hover .sn{color:var(--accent2)}
+  .sn{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--text);transition:color .1s}
   .sm{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--text-muted);letter-spacing:.08em;margin-top:.2rem}
   .sav{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--accent);font-weight:700;text-align:right}
   .sbf{height:3px;background:var(--surface2)}
@@ -98,8 +100,10 @@
   .sbfi{height:100%;transition:width .5s}
   .sjl{display:none;padding:.8rem 1.2rem;background:var(--bg);border-top:1px solid var(--border)}
   .sjl.open{display:block}
-  .mr{display:grid;grid-template-columns:1fr 120px 52px;gap:1rem;align-items:center;padding:.32rem 0;font-size:.72rem}
-  .mt{color:var(--text-muted)}
+  .mr{display:grid;grid-template-columns:1fr 120px 52px;gap:1rem;align-items:center;padding:.32rem .4rem;font-size:.72rem;border-radius:2px;transition:background .1s}
+  .mr:hover{background:var(--surface2)}
+  .mt{color:var(--text-muted);transition:color .1s}
+  .mr:hover .mt{color:var(--accent2)}
   .mb{height:3px;background:var(--surface2);border-radius:1px;overflow:hidden}
   .mf{height:100%;border-radius:1px}
   .mv{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--text-muted);text-align:right}
@@ -114,9 +118,11 @@
   .rlt{font-size:.75rem;color:var(--text-muted);line-height:1.4}
   .rlt strong{color:var(--text);display:block;font-size:.8rem;margin-bottom:.1rem}
   .gtitle{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem;border-bottom:1px solid var(--border);padding-bottom:.5rem;margin-top:1.5rem}
-  .gr{display:grid;grid-template-columns:1fr 50px 50px 50px;gap:.5rem;align-items:center;padding:.3rem 0;border-bottom:1px solid #141414;font-size:.7rem}
+  .gr{display:grid;grid-template-columns:1fr 50px 50px 50px;gap:.5rem;align-items:center;padding:.3rem .4rem;border-bottom:1px solid #141414;font-size:.7rem;border-radius:2px;transition:background .1s}
+  .gr:not(.h):hover{background:var(--surface2)}
+  .gr:not(.h):hover .gs{color:var(--accent2)}
   .gr.h{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--text-muted);letter-spacing:.08em}
-  .gs{color:var(--text-muted)}
+  .gs{color:var(--text-muted);transition:color .1s}
   .gv{font-family:'DM Mono',monospace;font-size:.65rem;text-align:right}
   .gv.t{color:var(--blue)}
   .gv.o{color:var(--accent)}
@@ -267,7 +273,7 @@
     <div id="rc2" class="r-layout">
       <div id="radar-wrap" style="position:relative">
         <svg id="radar-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"></svg>
-        <div style="margin-top:.8rem;padding:.8rem 1rem;background:#0f0f0f;border-left:2px solid rgba(200,169,110,.3);border-radius:0 2px 2px 0;font-size:.72rem;color:#7a7670;line-height:1.6">
+        <div style="margin-top:.8rem;padding:.8rem 1rem;background:#0f0f0f;border-left:2px solid rgba(200,169,110,.3);border-radius:0 2px 2px 0;font-size:.72rem;color:#7a7670;line-height:1.6;transition:background .15s,border-color .15s,color .15s;cursor:default" onmouseover="this.style.background='var(--surface2)';this.style.borderLeftColor='var(--accent)';this.style.color='#aaa'" onmouseout="this.style.background='#0f0f0f';this.style.borderLeftColor='rgba(200,169,110,.3)';this.style.color='#7a7670'">
           <span style="color:var(--accent);font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase">¿Cómo leer la brecha?</span><br>
           Una diferencia de 10 pp entre el valor teórico y el observado puede significar que el 10% de las tareas todavía no se ejecuta con IA en la práctica. Los valores observados bajos no siempre indican que la IA no puede hacer esas tareas — en algunos casos simplemente no hay suficiente tráfico registrado para medirlo.
         </div>
