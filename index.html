@@ -32,18 +32,18 @@
   .tab-page{display:none}
   .tab-page.active{display:block}
   .layout{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 200px)}
-  aside{border-right:1px solid var(--border);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto}
+  aside{border-right:1px solid var(--border);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem;overflow-y:auto;box-sizing:border-box}
   .stitle{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid #1f1f1f}
   .search-wrap input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.8rem;padding:.6rem .8rem;outline:none;transition:border-color .2s}
   .search-wrap input:focus{border-color:var(--accent)}
   .search-wrap input::placeholder{color:var(--text-muted)}
   .sector-filters{display:flex;flex-direction:column;gap:.1rem;max-height:360px;overflow-y:auto}
-  .sbtn{display:flex;justify-content:space-between;align-items:center;background:none;border:none;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:.7rem;padding:.35rem .5rem;cursor:pointer;border-radius:2px;transition:all .15s;text-align:left;gap:.5rem;width:100%}
-  .sbtn:hover{background:var(--surface2);color:var(--text)}
-  .sbtn.active{background:var(--surface2);color:var(--accent)}
-  .sbtn .pill{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text-dim);flex-shrink:0}
-  .sbtn.active .pill{color:var(--accent)}
-  .legend{margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
+  .sbtn,.sbtn2{display:flex;justify-content:space-between;align-items:center;background:none;border:none;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:.7rem;padding:.35rem .5rem;cursor:pointer;border-radius:2px;transition:all .15s;text-align:left;gap:.5rem;width:100%}
+  .sbtn:hover,.sbtn2:hover{background:var(--surface2);color:var(--text)}
+  .sbtn.active,.sbtn2.active{background:var(--surface2);color:var(--accent)}
+  .sbtn .pill,.sbtn2 .pill{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text-dim);flex-shrink:0}
+  .sbtn.active .pill,.sbtn2.active .pill{color:var(--accent)}
+  .legend{padding-top:1rem;border-top:1px solid var(--border)}
   .li{display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--text-muted);margin-bottom:.4rem}
   .ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
   .radar-note{display:none;font-size:.7rem;color:var(--text-muted);line-height:1.6;padding:.8rem;background:var(--surface2);border-radius:2px;border-left:2px solid var(--accent)}
@@ -58,7 +58,7 @@
   .vt.active{background:var(--accent);border-color:var(--accent);color:var(--bg)}
   .vt:hover:not(.active){border-color:var(--text-muted);color:var(--text)}
   #chart-view{padding:1.5rem 2rem;overflow-y:auto;flex:1}
-  .crow{display:grid;grid-template-columns:260px 1fr 60px;align-items:center;gap:1rem;padding:.55rem .4rem;border-bottom:1px solid #141414;transition:background .1s;border-radius:2px}
+  .crow.hl-mine{background:rgba(200,169,110,.08);border-left:2px solid var(--accent)}grid-template-columns:260px 1fr 60px;align-items:center;gap:1rem;padding:.55rem .4rem;border-bottom:1px solid #141414;transition:background .1s;border-radius:2px}
   .crow:hover{background:var(--surface2)}
   .crow:hover .jt{color:var(--accent2)}
   /* Distribución */
@@ -138,9 +138,10 @@
   ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
   @media(max-width:900px){
     header{padding:1.5rem;flex-direction:column;align-items:flex-start}
-    .layout{grid-template-columns:1fr;height:auto;min-height:calc(100vh - 200px)}
-    aside{border-right:none;border-bottom:1px solid var(--border);max-height:280px;overflow-y:auto;padding:1.2rem 1.2rem}
-    #chart-view,#sector-view,#radar-view{padding:1rem;height:auto;min-height:400px;overflow-y:auto;flex:none}
+    .layout{grid-template-columns:1fr;height:auto}
+    aside{border-right:none;border-bottom:1px solid var(--border);max-height:260px;overflow-y:auto}
+    #chart-view,#sector-view{height:60vh;overflow-y:auto}
+    #radar-view{padding:1rem;height:auto}
     .crow{grid-template-columns:160px 1fr 52px}
     .rc{grid-template-columns:1fr}
     .tabs{padding:0 1rem}
@@ -174,35 +175,40 @@
 <body>
 <header>
   <div>
-    <div class="eyebrow">Anthropic Economic Index · 2025</div>
-    <h1>Exposición a la IA por <span>Ocupación</span></h1>
+    <div class="eyebrow">Anthropic · 2026</div>
+    <h1>¿Qué tan expuesto está tu <span>trabajo a la IA</span>?</h1>
   </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.8rem">
-    <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--text-muted)">Desarrollado por <a href="https://www.linkedin.com/in/ver%C3%B3nica-teilletchea" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3);transition:border-color .15s" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.3)'">Verónica Teilletchea</a> · Construido con Claude</div>
+    <div style="font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:var(--text-muted)">Desarrollado por <a href="https://www.linkedin.com/in/ver%C3%B3nica-teilletchea" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3);transition:border-color .15s" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.3)'">Verónica Teilletchea</a> · Construido con Claude</div>
   </div>
 </header>
-<div class="source-bar">
-  <div>Fuente: <span>Anthropic/EconomicIndex</span> · HuggingFace</div>
-</div>
 
 <details style="border-bottom:1px solid var(--border);background:var(--surface)">
   <summary style="padding:.65rem 3rem;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;list-style:none;display:flex;align-items:center;gap:.6rem;user-select:none" onmouseover="this.style.color='var(--highlight)'" onmouseout="this.style.color='var(--text-muted)'">
-    <span id="met-arrow" style="font-size:.7rem;transition:transform .2s">▶</span> Metodología
+    <span id="met-arrow" style="font-size:.7rem;transition:transform .2s">▶</span> Sobre los datos
   </summary>
-  <div style="padding:1.2rem 3rem 1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 3rem;font-size:.75rem;color:#8a8680;line-height:1.6;border-top:1px solid #1a1a1a">
-    <div>
-      <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Exposición Observada</div>
-      Mide qué fracción de las tareas de cada ocupación aparece en conversaciones reales de trabajo con Claude. Para que una tarea cuente, debe superar un umbral mínimo de uso (≥100 conversaciones laborales) y ser teóricamente realizable con un LLM. Las tareas donde la IA <em>ejecuta</em> el trabajo directamente pesan más que las donde solo <em>asiste</em> al trabajador. El índice ocupacional es el promedio ponderado por el tiempo que cada tarea representa en la jornada laboral.
+  <div style="padding:1.2rem 3rem 1.4rem;font-size:.75rem;color:#8a8680;line-height:1.6;border-top:1px solid #1a1a1a">
+    <div style="margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid #1a1a1a">
+      Este dashboard está construido sobre los datos publicados por Anthropic en <a href="https://huggingface.co/datasets/Anthropic/EconomicIndex/tree/main/labor_market_impacts" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3)" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.3)'">HuggingFace</a> como parte del paper de <a href="https://www.anthropic.com/research/labor-market-impacts" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3)" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.3)'">Massenkoff &amp; McCrory (2026)</a>. Los datos fueron descargados y procesados para mostrar información a nivel de ocupación individual que no aparece en el paper. A partir de esos datos, el dashboard visualiza tres métricas:
     </div>
-    <div>
-      <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Exposición Teórica (β)</div>
-      Índice β de Eloundou et al. (2023): proporción de tareas de cada ocupación donde un LLM puede acelerar la ejecución al menos al doble, según evaluación de expertos sobre las tareas declaradas en O*NET. Mide potencial tecnológico, no adopción efectiva. La brecha entre β y exposición observada revela dónde la tecnología aún no se tradujo en uso real.
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem 2.5rem">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Exposición Observada</div>
+        Mide qué fracción de las tareas de cada ocupación aparece en conversaciones reales de trabajo con Claude. Para que una tarea cuente, debe superar un umbral mínimo de uso (≥100 conversaciones laborales) y ser teóricamente realizable con un LLM. Las tareas donde la IA <em>ejecuta</em> el trabajo directamente pesan más que las donde solo <em>asiste</em> al trabajador. El índice ocupacional es el promedio ponderado por el tiempo que cada tarea representa en la jornada laboral.
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(74,144,196,.9);margin-bottom:.5rem">Exposición Teórica (β)</div>
+        Índice β de Eloundou et al. (2023): proporción de tareas de cada ocupación donde un LLM puede acelerar la ejecución al menos al doble, según evaluación de expertos sobre las tareas declaradas en O*NET. Mide potencial tecnológico, no adopción efectiva.
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#888;margin-bottom:.5rem">Brecha</div>
+        Diferencia entre exposición teórica y observada, expresada en puntos porcentuales. Revela dónde la tecnología aún no se tradujo en uso real — el potencial de adopción todavía no materializado. En sectores como Informática y Matemáticas, la brecha supera los 60 pp.
+      </div>
     </div>
-    <div style="grid-column:1/-1;padding-top:.8rem;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+    <div style="margin-top:1rem;padding-top:.8rem;border-top:1px solid #1a1a1a">
       <div style="font-family:'DM Mono',monospace;font-size:.63rem;color:var(--text-muted);letter-spacing:.08em">
         Cobertura: <span style="color:#bbb">756 ocupaciones SOC</span> (Standard Occupational Classification · BLS)
       </div>
-      <a href="https://www.anthropic.com/research/labor-market-impacts" target="_blank" rel="noopener" style="color:var(--accent);font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3);transition:border-color .15s" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.3)'">↗ Massenkoff &amp; McCrory (2026)</a>
     </div>
   </div>
 </details>
@@ -223,9 +229,9 @@
 <div id="tab-ranking" class="tab-page active">
   <div class="layout">
     <aside>
-      <div id="ss"><div class="stitle">Buscar</div><div class="search-wrap"><input type="text" id="search-input" placeholder="ej. enfermero, analista…"></div></div>
+      <div id="ss"><div class="stitle">Buscá tu ocupación</div><div class="search-wrap"><input type="text" id="search-input" placeholder="ej. enfermero, programador…"></div><div id="my-occ-result" style="margin-top:.5rem;font-size:.68rem;color:var(--text-muted);line-height:1.4"></div></div>
       <div class="legend" id="leg">
-        <div class="stitle">Nivel de exposición</div>
+        <div class="stitle">Nivel de exposición <span style="text-transform:none;font-size:.55rem">(clasificación propia)</span></div>
         <div class="li"><div class="ld" style="background:#c0392b"></div>Alta (&gt; 50%)</div>
         <div class="li"><div class="ld" style="background:#c8a96e"></div>Media (20–50%)</div>
         <div class="li"><div class="ld" style="background:#3a5a3a"></div>Baja (0–20%)</div>
@@ -236,6 +242,10 @@
     <main>
       <div class="cbar">
         <div class="rcount">Mostrando <strong id="rc">—</strong> ocupaciones</div>
+        <div style="display:flex;gap:0">
+          <button class="vt active" id="sort-exp" onclick="setSort('exp')">Exposición ↓</button>
+          <button class="vt" id="sort-az" onclick="setSort('az')">A → Z</button>
+        </div>
       </div>
       <div id="chart-view"></div>
       <div class="nores" id="nores">No se encontraron ocupaciones con ese criterio.</div>
@@ -247,9 +257,9 @@
 <div id="tab-sector" class="tab-page">
   <div class="layout">
     <aside>
-      <div id="ss2"><div class="stitle">Buscar sector</div><div class="search-wrap"><input type="text" id="search-input-sector" placeholder="ej. salud, educación, artes…"></div></div>
+      <div id="sf2"><div class="stitle">Filtrar por sector</div><div class="sector-filters" id="sector-filters2"><button class="sbtn2 active" data-sector="ALL"><span>Todos los sectores</span><span class="pill">—</span></button></div></div>
       <div class="legend">
-        <div class="stitle">Nivel de exposición</div>
+        <div class="stitle">Nivel de exposición <span style="text-transform:none;font-size:.55rem">(clasificación propia)</span></div>
         <div class="li"><div class="ld" style="background:#c0392b"></div>Alta (&gt; 50%)</div>
         <div class="li"><div class="ld" style="background:#c8a96e"></div>Media (20–50%)</div>
         <div class="li"><div class="ld" style="background:#3a5a3a"></div>Baja (0–20%)</div>
@@ -266,7 +276,7 @@
 <div id="tab-radar" class="tab-page">
   <div style="padding:2rem 3rem">
     <div class="rtitle">Capacidad teórica vs. uso real de la IA</div>
-    <div class="rnote" style="margin:.3rem 0 0">Fuente: Massenkoff &amp; McCrory (2026) · Anthropic · Pasá el cursor sobre cada sector para ver el detalle.</div>
+    <div class="rnote" style="margin:.3rem 0 0">Pasá el cursor sobre cada sector para ver el detalle.</div>
     <div style="margin:.8rem 0 1rem;display:flex;gap:1.5rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#6b6660"><div style="width:14px;height:3px;background:rgba(74,144,196,.8);border-radius:1px"></div><span><span style="color:rgba(74,144,196,.9);font-weight:600">Teórico (β)</span> — Eloundou et al. (2023): proporción de tareas donde un LLM puede acelerar ≥2×</span></div>
       <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#6b6660"><div style="width:14px;height:3px;background:rgba(192,57,43,.8);border-radius:1px"></div><span><span style="color:rgba(192,57,43,.9);font-weight:600">Observado</span> — uso real en Claude, ponderando automatización sobre augmentación</span></div>
@@ -355,7 +365,21 @@ function gc(v){if(v===0)return'#2a2a2a';if(v<.2)return'#3a5a3a';if(v<.5)return'#
 function it(v){if(v===0)return'Sin exposición';if(v<.1)return'Mínima';if(v<.3)return'Emergente';if(v<.5)return'Significativa';if(v<.7)return'Alta';return'Muy alta'}
 function pct(v){return(v*100).toFixed(1)+'%'}
 
-let curSec='ALL',q='',qSector='',curView='chart';
+let curSec='ALL',curSec2='ALL',q='',qSector='',curView='chart',curSort='exp',curSortDir=1;
+
+function setSort(s){
+  if(s==='exp'&&curSort==='exp'){
+    curSortDir*=-1;
+    document.getElementById('sort-exp').textContent='Exposición '+(curSortDir===1?'↓':'↑');
+  } else {
+    curSort=s;
+    curSortDir=1;
+    document.getElementById('sort-exp').textContent='Exposición ↓';
+  }
+  document.getElementById('sort-exp').classList.toggle('active',s==='exp');
+  document.getElementById('sort-az').classList.toggle('active',s==='az');
+  update();
+}
 
 const sf=document.getElementById('sector-filters');
 SD.forEach(s=>{
@@ -365,35 +389,53 @@ SD.forEach(s=>{
   sf.appendChild(b);
 });
 
-function gf(){return JD.filter(d=>(curSec==='ALL'||d.sector===curSec)&&(!q||d.title.toLowerCase().includes(q.toLowerCase())))}
+const sf2=document.getElementById('sector-filters2');
+SD.forEach(s=>{
+  const b=document.createElement('button');
+  b.className='sbtn2';b.dataset.sector=s.sector;
+  b.innerHTML='<span>'+s.sector+'</span><span class="pill">'+pct(s.avg)+'</span>';
+  sf2.appendChild(b);
+});
+
+function gf(){
+  const data=JD.filter(d=>(curSec==='ALL'||d.sector===curSec)&&(!q||d.title.toLowerCase().includes(q.toLowerCase())));
+  return curSort==='az'?data.sort((a,b)=>a.title.localeCompare(b.title)):data.sort((a,b)=>(b.observed_exposure-a.observed_exposure)*curSortDir);
+}
 
 function renderChart(data){
   const el=document.getElementById('chart-view');
   if(!data.length){el.innerHTML='';return}
-  const mx=Math.max(...data.map(d=>d.observed_exposure),.01);
   el.innerHTML=data.map(d=>'<div class="crow" data-code="'+d.occ_code+'">'+
     '<div><div class="jt">'+d.title+'</div><div class="js">'+(d.sector||'—')+'</div></div>'+
-    '<div class="bc"><div class="bf" style="width:'+(d.observed_exposure/mx*100).toFixed(1)+'%;background:'+gc(d.observed_exposure)+'"></div></div>'+
+    '<div class="bc"><div class="bf" style="width:'+(d.observed_exposure*100).toFixed(1)+'%;background:'+gc(d.observed_exposure)+'"></div></div>'+
     '<div class="bv">'+pct(d.observed_exposure)+'</div></div>').join('');
+  // Reaplicar highlight
+  if(myOcc){
+    const matches=JD.filter(d=>d.title.toLowerCase().includes(myOcc));
+    if(matches.length){
+      const row=document.querySelector('.crow[data-code="'+matches[0].occ_code+'"]');
+      if(row)row.classList.add('hl-mine');
+    }
+  }
 }
 
 function renderSector(){
   const el=document.getElementById('sector-view');
   const g={};JD.forEach(d=>{if(!g[d.sector])g[d.sector]=[];g[d.sector].push(d)});
-  const filt=SD.filter(s=>(curSec==='ALL'||s.sector===curSec)&&(!qSector||s.sector.toLowerCase().includes(qSector.toLowerCase())));
+  const filt=SD.filter(s=>(curSec2==='ALL'||s.sector===curSec2)&&(!qSector||s.sector.toLowerCase().includes(qSector.toLowerCase())));
   el.innerHTML=filt.map(s=>{
     const jobs=(g[s.sector]||[]).filter(d=>!qSector||d.title.toLowerCase().includes(qSector.toLowerCase()))
       .sort((a,b)=>b.observed_exposure-a.observed_exposure).slice(0,15);
-    const bw=Math.min(s.avg/.4*100,100).toFixed(1);
+    const bw=(s.avg*100).toFixed(1);
     const beta=BETA[s.sector]||0;
-    const btw=Math.min(beta/.4*100,100).toFixed(1);
+    const btw=(beta*100).toFixed(1);
     return '<div class="sc"><div class="sch" onclick="tog(this)">'+
       '<div><div class="sn">'+s.sector+'</div></div>'+
       '<div class="sec-vals"><div class="sec-val-obs">'+pct(s.avg)+'</div><div class="sec-val-teo">β '+pct(beta)+'</div></div></div>'+
       '<div class="sbf"><div class="sbfi" style="width:'+bw+'%;background:rgba(192,57,43,.75)'+'"></div></div>'+
       '<div class="sbf-teo"><div class="sbfi-teo" style="width:'+btw+'%"></div></div>'+
       '<div class="sjl">'+jobs.map(j=>'<div class="mr"><div class="mt">'+j.title+'</div>'+
-        '<div class="mb"><div class="mf" style="width:'+(j.observed_exposure/.8*100).toFixed(1)+'%;background:'+gc(j.observed_exposure)+'"></div></div>'+
+        '<div class="mb"><div class="mf" style="width:'+(j.observed_exposure*100).toFixed(1)+'%;background:'+gc(j.observed_exposure)+'"></div></div>'+
         '<div class="mv">'+pct(j.observed_exposure)+'</div></div>').join('')+'</div></div>';
   }).join('');
 }
@@ -473,7 +515,7 @@ function drawRadar(){
     const anchor=Math.abs(cosA)<0.15?'middle':(cosA<0?'end':'start');
     const yBase=sinA<-0.15?ly-totalH:(sinA>0.15?ly:ly-totalH/2);
 
-    const g=el('g',{style:'cursor:pointer'},svg);
+    const g=el('g',{'data-s':d.s,style:'cursor:pointer'},svg);
     lines.forEach((line,li)=>{
       const t=el('text',{x:lx,y:yBase+li*lh,fill:'#5a5652','font-family':'DM Sans,sans-serif','font-size':'10.5','text-anchor':anchor},g);
       t.textContent=line;
@@ -488,6 +530,9 @@ function drawRadar(){
         dot.setAttribute('r','8');
         dot.setAttribute('fill','rgba(192,57,43,1)');
         g.querySelectorAll('text').forEach(t=>t.setAttribute('fill','#e8e4dc'));
+        // Resaltar fila en tabla
+        const row=document.querySelector('#gap-table .gr[data-s="'+d.s+'"]');
+        if(row)row.style.background='var(--surface2)';
         document.getElementById('rt-name').textContent=d.s;
         document.getElementById('rt-obs').textContent=(d.o*100).toFixed(0)+'%';
         document.getElementById('rt-teo').textContent=(d.t*100).toFixed(0)+'%';
@@ -507,6 +552,9 @@ function drawRadar(){
         dot.setAttribute('r','5');
         dot.setAttribute('fill','rgba(192,57,43,0.9)');
         g.querySelectorAll('text').forEach(t=>t.setAttribute('fill','#5a5652'));
+        // Limpiar fila en tabla
+        const row=document.querySelector('#gap-table .gr[data-s="'+d.s+'"]');
+        if(row)row.style.background='';
         tip.style.opacity='0';
       });
     });
@@ -520,9 +568,21 @@ function renderGap(){
   const sorted=[...RD].sort((a,b)=>(b.t-b.o)-(a.t-a.o));
   el.innerHTML='<div class="gtitle">Brecha por sector (mayor a menor)</div>'+
     '<div class="gr h"><div>Sector</div><div class="gv" style="color:rgba(74,144,196,.7)">Teór.</div><div class="gv" style="color:rgba(192,57,43,.7)">Obs.</div><div class="gv">Brecha</div></div>'+
-    sorted.map(d=>'<div class="gr"><div class="gs">'+d.s+'</div>'+
+    sorted.map(d=>'<div class="gr" data-s="'+d.s+'"><div class="gs">'+d.s+'</div>'+
       '<div class="gv t">'+pct(d.t)+'</div><div class="gv o" style="color:rgba(192,57,43,.8)">'+pct(d.o)+'</div>'+
       '<div class="gv b'+(d.t-d.o>.4?' bh':'')+'">'+((d.t-d.o)*100).toFixed(0)+' pp</div></div>').join('');
+
+  // Hover cruzado tabla → radar
+  el.querySelectorAll('.gr:not(.h)').forEach(row=>{
+    row.addEventListener('mouseenter',()=>{
+      const s=row.dataset.s;
+      document.querySelectorAll('#radar-svg [data-s="'+s+'"] text').forEach(t=>t.setAttribute('fill','#e8e4dc'));
+    });
+    row.addEventListener('mouseleave',()=>{
+      const s=row.dataset.s;
+      document.querySelectorAll('#radar-svg [data-s="'+s+'"] text').forEach(t=>t.setAttribute('fill','#5a5652'));
+    });
+  });
 }
 
 const tip=document.getElementById('tip');
@@ -546,9 +606,29 @@ sf.addEventListener('click',e=>{
   b.classList.add('active');update();
 });
 
-document.getElementById('search-input').addEventListener('input',e=>{q=e.target.value;update()});
-const si2=document.getElementById('search-input-sector');
-if(si2)si2.addEventListener('input',e=>{qSector=e.target.value;renderSector()});
+sf2.addEventListener('click',e=>{
+  const b=e.target.closest('.sbtn2');if(!b)return;
+  curSec2=b.dataset.sector;
+  document.querySelectorAll('.sbtn2').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');renderSector();
+});
+
+let myOcc='';
+document.getElementById('search-input').addEventListener('input',e=>{
+  q=e.target.value;
+  myOcc=q.toLowerCase().trim();
+  update();
+  // Highlight primera coincidencia
+  const res=document.getElementById('my-occ-result');
+  document.querySelectorAll('.crow.hl-mine').forEach(r=>r.classList.remove('hl-mine'));
+  if(!myOcc){res.textContent='';return;}
+  const matches=JD.filter(d=>d.title.toLowerCase().includes(myOcc));
+  if(!matches.length){res.textContent='';return;}
+  const best=matches[0];
+  res.innerHTML='<span style="color:var(--accent2)">'+best.title+'</span> · <span style="color:#666">'+pct(best.observed_exposure)+'</span>';
+  const row=document.querySelector('.crow[data-code="'+best.occ_code+'"]');
+  if(row){row.classList.add('hl-mine');row.scrollIntoView({behavior:'smooth',block:'center'});}
+});
 
 document.querySelectorAll('.tab-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
