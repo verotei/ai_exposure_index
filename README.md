@@ -1,68 +1,25 @@
-# Índice de Exposición Ocupacional a la IA
+Exposición Laboral a la IA
+Visualización interactiva del Anthropic Economic Index (Massenkoff & McCrory, 2026) — exposición de ocupaciones al uso real de modelos de lenguaje, basada en datos de conversaciones de Claude.
+🔗 Paper · Dataset en HuggingFace
 
-Visualización interactiva del **Anthropic Economic Index** (Massenkoff & McCrory, 2026) — exposición de ocupaciones al uso real de modelos de lenguaje, basada en datos de conversaciones de Claude.
+Qué muestra
+756 ocupaciones SOC (BLS) organizadas por sector, con su exposición observada a la IA y el detalle de tareas cuando está disponible. La búsqueda permite explorar por ocupación o por tarea específica.
+Métricas
+Exposición observada — fracción del tiempo laboral correspondiente a tareas donde la IA ya opera: aparecen en uso real de Claude y son teóricamente ejecutables por un LLM. Un valor de 0,45 significa que el 45 % del tiempo de esa ocupación ya está tocado por la IA.
+Penetración de tarea — frecuencia con que una tarea específica aparece en conversaciones profesionales reales con Claude. No indica reemplazo total, sino intervención habitual.
 
-🔗 [Ver paper](https://www.anthropic.com/research/labor-market-impacts) · [Dataset en HuggingFace](https://huggingface.co/datasets/Anthropic/EconomicIndex)
+Nota: 86 ocupaciones no tienen detalle de tareas por diferencia entre SOC 2022 (ocupaciones) y O*NET 2019 (tareas). Muestran exposición agregada pero no el desglose.
 
----
+Stack
 
-## Descripción
+HTML/CSS/JS vanilla — sin frameworks ni dependencias externas
+Datos embebidos en el HTML
+Fuentes: Playfair Display, DM Mono (Google Fonts)
+Deploy: sitio estático en Vercel
 
-La app permite explorar la exposición observada y teórica a la IA para 756 ocupaciones SOC (Standard Occupational Classification · BLS), organizadas en tres vistas:
+Deploy
+Proyecto de un único archivo index.html autocontenido. Para Vercel: conectar el repo y hacer deploy como sitio estático.
+Referencia
+Massenkoff, M. & McCrory, E. (2026). Labor market impacts of AI: A new measure and early evidence. Anthropic.
 
-- **Ranking** — listado de ocupaciones ordenado por exposición observada, con filtros por sector y búsqueda
-- **Por Sector** — agrupación sectorial con exposición promedio observada y teórica (β)
-- **Teórico vs Real** — gráfico de radar comparando ambas métricas por sector, con tabla de brecha en pp
-
-## Métricas
-
-**Exposición Observada** (`observed_exposure`): fracción de tareas de cada ocupación que aparece en conversaciones reales de trabajo con Claude. Para que una tarea cuente debe superar un umbral mínimo de tráfico (≥100 conversaciones laborales), ser teóricamente realizable con un LLM (β ≥ 0.5), y se pondera según qué proporción del uso es automativo vs. augmentativo. El índice ocupacional es el promedio ponderado por fracción de tiempo de cada tarea.
-
-**Exposición Teórica (β)**: índice de Eloundou et al. (2023) — proporción de tareas donde un LLM puede acelerar la ejecución al menos al doble, según evaluación de expertos sobre tareas O\*NET. Mide potencial tecnológico, no adopción efectiva.
-
-## Datos
-
-| Archivo | Descripción |
-|---|---|
-| `job_exposure.csv` | 756 ocupaciones con `occ_code`, `title`, `observed_exposure` |
-| `task_penetration.csv` | 17.998 tareas con nivel de penetración en Claude |
-
-Fuente: [Anthropic/EconomicIndex](https://huggingface.co/datasets/Anthropic/EconomicIndex) en HuggingFace.
-
-## Stack técnico
-
-- HTML/CSS/JS vanilla — sin frameworks, sin dependencias externas
-- Datos embebidos directamente en el HTML (arrays JS)
-- SVG nativo para el gráfico de radar (D3 no requerido)
-- Fuentes: Playfair Display, DM Mono, DM Sans (Google Fonts)
-- Deploy: sitio estático, compatible con Vercel / GitHub Pages
-
-## Deploy
-
-El proyecto es un único archivo `index.html` autocontenido.
-
-```bash
-# Clonar
-git clone https://github.com/tu-usuario/tu-repo.git
-
-# No requiere build — abrir directamente en browser
-open index.html
-```
-
-Para Vercel: conectar el repo y hacer deploy como sitio estático. No requiere `vercel.json`.
-
-## Estructura del repo
-
-```
-.
-├── index.html     # App completa (datos + lógica + estilos)
-└── README.md
-```
-
-## Referencia
-
-Massenkoff, M. & McCrory, E. (2026). *Labor market impacts of AI: A new measure and early evidence*. Anthropic.
-
----
-
-
+Desarrollado por Verónica Teilletchea · Construido con Claude
