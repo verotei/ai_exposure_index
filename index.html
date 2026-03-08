@@ -192,16 +192,16 @@
       Este dashboard está construido sobre los datos publicados por Anthropic en <a href="https://huggingface.co/datasets/Anthropic/EconomicIndex/tree/main/labor_market_impacts" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3)" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.3)'">HuggingFace</a> como parte del paper de <a href="https://www.anthropic.com/research/labor-market-impacts" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3)" onmouseover="this.style.borderBottomColor='var(--accent)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.3)'">Massenkoff &amp; McCrory (2026)</a>. Los datos fueron descargados y procesados para mostrar información a nivel de ocupación individual que no aparece en el paper. A partir de esos datos, el dashboard visualiza tres métricas:
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem 2.5rem">
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Exposición Observada</div>
+      <div style="padding:.6rem;border-radius:4px;transition:background .2s" onmouseover="this.style.background='rgba(200,169,110,.05)';this.querySelector('.mcol-title').style.opacity='1'" onmouseout="this.style.background='transparent';this.querySelector('.mcol-title').style.opacity='.85'">
+        <div class="mcol-title" style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;opacity:.85;transition:opacity .2s">Exposición Observada</div>
         Mide qué fracción de las tareas de cada ocupación aparece en conversaciones reales de trabajo con Claude. Para que una tarea cuente, debe superar un umbral mínimo de uso (≥100 conversaciones laborales) y ser teóricamente realizable con un LLM. Las tareas donde la IA <em>ejecuta</em> el trabajo directamente pesan más que las donde solo <em>asiste</em> al trabajador. El índice ocupacional es el promedio ponderado por el tiempo que cada tarea representa en la jornada laboral.
       </div>
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(74,144,196,.9);margin-bottom:.5rem">Exposición Teórica (β)</div>
+      <div style="padding:.6rem;border-radius:4px;transition:background .2s" onmouseover="this.style.background='rgba(74,144,196,.05)';this.querySelector('.mcol-title').style.opacity='1'" onmouseout="this.style.background='transparent';this.querySelector('.mcol-title').style.opacity='.85'">
+        <div class="mcol-title" style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(74,144,196,.9);margin-bottom:.5rem;opacity:.85;transition:opacity .2s">Exposición Teórica (β)</div>
         Índice β de Eloundou et al. (2023): proporción de tareas de cada ocupación donde un LLM puede acelerar la ejecución al menos al doble, según evaluación de expertos sobre las tareas declaradas en O*NET. Mide potencial tecnológico, no adopción efectiva.
       </div>
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#888;margin-bottom:.5rem">Brecha</div>
+      <div style="padding:.6rem;border-radius:4px;transition:background .2s" onmouseover="this.style.background='rgba(136,136,136,.05)';this.querySelector('.mcol-title').style.opacity='1'" onmouseout="this.style.background='transparent';this.querySelector('.mcol-title').style.opacity='.85'">
+        <div class="mcol-title" style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#888;margin-bottom:.5rem;opacity:.85;transition:opacity .2s">Brecha</div>
         Diferencia entre exposición teórica y observada, expresada en puntos porcentuales. Revela dónde la tecnología aún no se tradujo en uso real — el potencial de adopción todavía no materializado. En sectores como Informática y Matemáticas, la brecha supera los 60 pp.
       </div>
     </div>
