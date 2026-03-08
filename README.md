@@ -35,4 +35,3 @@ Massenkoff, M. & McCrory, E. (2026). *Labor market impacts of AI: A new measure 
 
 ---
 
-Desarrollado por [Verónica Teilletchea](https://www.linkedin.com/in/verónica-teilletchea) · Construido con Claude
